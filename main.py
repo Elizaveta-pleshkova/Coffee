@@ -1,4 +1,4 @@
-from mainu import Ui_mainWindow
+from main.ui import Ui_mainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
 import sys
