@@ -10,6 +10,7 @@ class MainWindow(QMainWindow):
         uic.loadUi('main.ui', self)
         self.pushButton.clicked.connect(self.fill)
 
+
     def fill(self):
         self.tableWidget.clear()
 
@@ -20,7 +21,7 @@ class MainWindow(QMainWindow):
         self.tableWidget.setHorizontalHeaderLabels(labels)
         with sqlite3.connect("coffee.db") as connect:
             for ID, Name, Stepen, Tip, Opisanie, Cena, Obem in connect.execute(
-                    """SELECT * FROM prise where id > 0"""):
+                    """SELECT * FROM price where ID > 0"""):
                 row = self.tableWidget.rowCount()
                 self.tableWidget.setRowCount(row + 1)
                 self.tableWidget.setItem(row, 0, QTableWidgetItem(str(ID)))
@@ -30,6 +31,8 @@ class MainWindow(QMainWindow):
                 self.tableWidget.setItem(row, 4, QTableWidgetItem(Opisanie))
                 self.tableWidget.setItem(row, 5, QTableWidgetItem(str(Cena)))
                 self.tableWidget.setItem(row, 6, QTableWidgetItem(str(Obem)))
+
+        self.tableWidget.resizeColumnsToContents()
 
 
 app = QApplication(sys.argv)
