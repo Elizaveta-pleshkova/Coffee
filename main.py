@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
 
         self.tableWidget.setColumnCount(len(labels))
         self.tableWidget.setHorizontalHeaderLabels(labels)
-        with sqlite3.connect("coffee.db") as connect:
+        with sqlite3.connect("Coffee.db") as connect:
             for ID, Name, Stepen, Tip, Opisanie, Cena, Obem in connect.execute(
                     """SELECT * FROM price where ID > 0"""):
                 row = self.tableWidget.rowCount()
