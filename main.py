@@ -12,14 +12,14 @@ class MainWindow(QMainWindow):
 
 
     def fill(self):
-        self.tableWidget.clear()
+        self.del_row()
 
         labels = ['ID', 'Название сорта', 'Степень обжарки', 'Молотый/в зернах',
                   'Описание вкуса', 'Цена', 'Объем упаковки']
 
         self.tableWidget.setColumnCount(len(labels))
         self.tableWidget.setHorizontalHeaderLabels(labels)
-        with sqlite3.connect("Coffee.db") as connect:
+        with sqlite3.connect("coffee.db") as connect:
             for ID, Name, Stepen, Tip, Opisanie, Cena, Obem in connect.execute(
                     """SELECT * FROM price where ID > 0"""):
                 row = self.tableWidget.rowCount()
@@ -33,6 +33,10 @@ class MainWindow(QMainWindow):
                 self.tableWidget.setItem(row, 6, QTableWidgetItem(str(Obem)))
 
         self.tableWidget.resizeColumnsToContents()
+
+    def del_row(self):
+        for d in range(self.tableWidget.rowCount()):
+            self.tableWidget.removeRow(0)
 
 
 app = QApplication(sys.argv)
